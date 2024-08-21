@@ -79,10 +79,12 @@ const Login = () => {
 
   return (
     <>
+    <div className='screen-section'>
       <div className="container">
         <div className="screen">
           <div className="screen__content">
             <form className="login">
+              <h1 className='form-title'>Sign in</h1>
               <div className="login__field">
                 <i className="login__icon"></i>
                 <input onChange={(e)=>setEmail(e.target.value)} type="text" className="login__input" placeholder="Email" value={email}/>
@@ -91,19 +93,24 @@ const Login = () => {
                 <i className="login__icon"></i>
                 <input onChange={(e)=>setPassword(e.target.value)} type="password" className="login__input" placeholder="Password" value={password}/>
               </div>
+              <div class="login__field checkbox__field">
+              <input type="checkbox" id="Rememberme" className="login__checkbox" />
+              <label for="Rememberme">Remember me</label>
+            </div>
             </form>
             <button className="button login__submit" onClick={()=>login()}>
-              <span className="button__text">Log In Now</span>
+              <span className="button__text">Login</span>
               <i className="button__icon"></i>
             </button>
             <p className="error" style={{color:"red"}}>{errorMsg}</p>
             <p className="success" style={{color:"green"}}>{successMsg}</p>
-            <div className="social_login">
+            {/* <div className="social_login">
               <button onClick={() => navigate("/signup")}><h3>Sign Up</h3></button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
+    </div>
     </>
   )
 }
