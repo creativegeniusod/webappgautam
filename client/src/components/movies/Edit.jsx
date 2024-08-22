@@ -2,6 +2,8 @@ import React from 'react'
 import { useSignOut,useAuthUser } from 'react-auth-kit'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Axios from 'axios';
+import LogoutIcon from '../../Images/logout-icon.svg';
+import DragDropIcon from '../../Images/drag-icon.svg';
 
 const Edit = () => {
 
@@ -149,7 +151,7 @@ const Edit = () => {
 
 	return (
 	    <>
-	    	<button onClick={()=>LogOut()}>Log Out</button>
+	    	{/* <button onClick={()=>LogOut()}>Log Out</button>
 	    	<h1 style={{textAlign:'center'}}>Update movie {movieTitle}</h1>
 	    	<form className="movie-form">
 	      		<input type="file" id="movie-image" onChange={handleFileChange}/>
@@ -158,7 +160,39 @@ const Edit = () => {
 	    	</form>
 	    	<button onClick={handleSubmit} className="mb-3 btn">Update</button>
 	    	<p style={{color:'red'}}>{visibleDanger}</p>
-	    	<p style={{color:'green'}}>{visibleSuccess}</p>
+	    	<p style={{color:'green'}}>{visibleSuccess}</p> */}
+
+			<div className='screen-section create-movie'>	
+				<div className='container'>
+					<button className='logout-btn' onClick={()=>LogOut()}>Log Out <img src={LogoutIcon} alt="Log Out" /></button>
+					{/* <h1 className='heading'>Edit {movieTitle}</h1> */}
+					<h1 className='heading'>Edit</h1>
+					<form className="movie-form">
+							<div className='drag-drop-wrapper'>
+								<div className='drag-drop-content'> 
+									<img src={DragDropIcon} alt='Image' />
+									<p className='drag-drop-text'>Drop an image here</p>
+									<p className='file-name'>32344443343.png</p>
+								</div>
+								<input type="file" id="movie-image" onChange={handleFileChange}/>
+							</div>
+						<div className='create-movie-content'>
+							<div className='create-movie-inputs'>
+							<input type="text" className='input-field' placeholder="Title" id="movie-title" value={movieTitle} onChange={handleTitleChange}/>
+							<input type="number" className='input-field year-field' placeholder="Year" min="1900" max="2099" step="1" value={movieYear} onChange={handleYearChange} />
+							</div>
+							<div className='btns-wrappers'>
+								<div className='btns-wrapper'>
+									<button onClick={handleSubmit} className="cancel-btn">Cancel</button>
+									<button onClick={handleSubmit} className="submit-btn">Update</button>
+								</div>
+								<p style={{color:'red'}}>{visibleDanger}</p>
+								</div>
+								<p style={{color:'green'}}>{visibleSuccess}</p>
+						</div>
+					</form>
+				</div>	
+			</div>
 	    </>
   	)
 

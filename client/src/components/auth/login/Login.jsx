@@ -79,7 +79,7 @@ const Login = () => {
 
   return (
     <>
-    <div className='screen-section'>
+    <div className='screen-section login-screen'>
       <div className="container">
         <div className="screen">
           <div className="screen__content">
