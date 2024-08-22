@@ -2,8 +2,8 @@ import React from 'react'
 import { useSignOut,useAuthUser } from 'react-auth-kit'
 import { useNavigate } from 'react-router-dom'
 import Axios from 'axios';
-import LogoutIcon from '../../Images/logout-icon.svg';
-import DragDropIcon from '../../Images/drag-icon.svg';
+// import LogoutIcon from '../../Images/logout-icon.svg';
+// import DragDropIcon from '../../Images/drag-icon.svg';
 
 const Create = () => {
 
@@ -124,12 +124,12 @@ const Create = () => {
 	    <>
 			<div className='screen-section create-movie'>	
 				<div className='container'>
-					<button className='logout-btn' onClick={()=>LogOut()}>Log Out <img src={LogoutIcon} alt="Log Out" /></button>
+					<button className='logout-btn' onClick={()=>LogOut()}>Log Out <img src="assets/images/logout-icon.svg" alt="Log Out" /></button>
 					<h1 className='heading'>Create a new movie</h1>
 					<form className="movie-form">
 						<div className='drag-drop-wrapper'>
 							<div className='drag-drop-content'> 
-								<img src={DragDropIcon} alt='Image' />
+								<img src="assets/images/drag-icon.svg" alt='Image' />
 								<p className='drag-drop-text'>Drop an image here</p>
 								<p className='file-name'>32344443343.png</p>
 							</div>

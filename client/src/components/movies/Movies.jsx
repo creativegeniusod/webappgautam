@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSignOut,useAuthUser } from 'react-auth-kit';
 import { Link, useNavigate} from 'react-router-dom';
-import LogoutIcon from '../../Images/logout-icon.svg';
-import PlusIcon from '../../Images/plus-icon.svg';
+// import LogoutIcon from '../../../public/assets/images/logout-icon.svg';
+// import PlusIcon from '../../../public/assets/images/plus-icon.svg';
 
 
 
@@ -148,7 +148,7 @@ const Movies = () => {
     <>
         <div className='screen-section empty-movie-screen'>
           <div className='container'>      
-              <button className='logout-btn' onClick={()=>LogOut()}>Log Out <img src={LogoutIcon} alt="Log Out" /></button>
+              <button className='logout-btn' onClick={()=>LogOut()}>Log Out <img src="assets/images/logout-icon.svg" alt="Log Out" /></button>
               <div className='empty-movie'>
                 <div className='empty-movie-content'>
                     <h2 className='heading' style={{textAlign:'center'}}>Your movie list is empty</h2>
@@ -156,7 +156,7 @@ const Movies = () => {
                 </div>
               </div>
               <div>
-                <h2 className='heading movies-heading'>My movies <img src={PlusIcon} alt='image' /></h2>
+                <h2 className='heading movies-heading'>My movies <img src="assets/images/plus-icon.svg" alt='image' /></h2>
                 <div className="movie-card-row">
                   {movies.map((movie,idx)=>(
                     <div key={idx} className="col">
