@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* Montserrat Font Family */
+@font-face{font-family:Montserrat;src:url('../src/assets/fonts/montserrat/Montserrat-ExtraLight.woff2') format('woff2'),url('../src/assets/fonts/montserrat/Montserrat-ExtraLight.woff') format('woff');font-weight:200;font-style:normal;font-display:swap}@font-face{font-family:Montserrat;src:url('../src/assets/fonts/montserrat/Montserrat-Medium.woff2') format('woff2'),url('../src/assets/fonts/montserrat/Montserrat-Medium.woff') format('woff');font-weight:500;font-style:normal;font-display:swap}@font-face{font-family:Montserrat;src:url('../src/assets/fonts/montserrat/Montserrat-Light.woff2') format('woff2'),url('../src/assets/fonts/montserrat/Montserrat-Light.woff') format('woff');font-weight:300;font-style:normal;font-display:swap}@font-face{font-family:Montserrat;src:url('../src/assets/fonts/montserrat/Montserrat-SemiBold.woff2') format('woff2'),url('../src/assets/fonts/montserrat/Montserrat-SemiBold.woff') format('woff');font-weight:600;font-style:normal;font-display:swap}@font-face{font-family:Montserrat;src:url('../src/assets/fonts/montserrat/Montserrat-Regular.woff2') format('woff2'),url('../src/assets/fonts/montserrat/Montserrat-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:Montserrat;src:url('../src/assets/fonts/montserrat/Montserrat-Thin.woff2') format('woff2'),url('../src/assets/fonts/montserrat/Montserrat-Thin.woff') format('woff');font-weight:100;font-style:normal;font-display:swap}@font-face{font-family:Montserrat;src:url('../src/assets/fonts/montserrat/Montserrat-Black.woff2') format('woff2'),url('../src/assets/fonts/montserrat/Montserrat-Black.woff') format('woff');font-weight:900;font-style:normal;font-display:swap}@font-face{font-family:Montserrat;src:url('../src/assets/fonts/montserrat/Montserrat-Bold.woff2') format('woff2'),url('../src/assets/fonts/montserrat/Montserrat-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}@font-face{font-family:Montserrat;src:url('../src/assets/fonts/montserrat/Montserrat-ExtraBold.woff2') format('woff2'),url('../src/assets/fonts/montserrat/Montserrat-ExtraBold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
 
+/* CSS Start */
 .screen-section {
   background-color: #093545;
   height: 100%;
   min-height: 100vh;
   font-family: "Montserrat", sans-serif;
-  background-image: url(../src/Images/layer.svg);
+  background-image: url(../src/assets/images/layer.svg);
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -28,6 +30,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  /* min-height: 100vh; */
 }
 .form-title {
   color: #FFFFFF;
@@ -263,6 +266,7 @@ linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09));
   margin: 100px auto;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .pagination .page-item .page-link {
   color: #ffffff;
@@ -318,24 +322,10 @@ linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09));
   height: 24px;
   margin: 0 auto 12px;
 }
-
 .movies-heading img {
   width: 32px;
   height: 32px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (max-width: 1199px) {
   .movie-card-row {
     grid-template-columns: repeat(3, 1fr);
@@ -353,11 +343,14 @@ linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09));
   }
   .create-movie .heading {
     margin-bottom: 80px;
-    padding-top: 40px;
+    margin-right: 26px;
+  }
 }
-}
-
 @media(max-width: 767px) {
+  .logout-btn {
+    font-size: 0;
+    top: 6px;
+  }
   .input-field.year-field {
     margin-bottom: 0;
   }
@@ -417,6 +410,7 @@ linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09));
     max-width: 100%;
   }
   .screen-section {
-    background-image: url(../src/Images/mobile-layer.svg);
+    background-image: url(../src/assets/images/mobile-layer.svg);
   }
 }
+/* CSS Ends */
