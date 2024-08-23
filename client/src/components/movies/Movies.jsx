@@ -9,11 +9,12 @@ import { Link, useNavigate} from 'react-router-dom';
 const Movies = () => {
   const [movies,setMovies] = React.useState([]);
   const [totalMovie,setTotalMovie] = React.useState(0);
+  const [totalPages,setTotalPages] = React.useState(0);
   const [offset,setOffset] = React.useState(0);
   const auth = useAuthUser();
   const signOut = useSignOut();
   const navigate = useNavigate();
-  const limit = 8;
+  const limit = 1;
 
 
   /**
@@ -50,9 +51,9 @@ const Movies = () => {
         }
     }).then((response) => response.json()
     ).then((rsp) => {
-        if(rsp.status && rsp.data.length > 0){
+        if(rsp.status){
           setMovies(rsp.data);
-          setTotalMovie(rsp.data[0].total_movies);
+          setTotalMovie(rsp.total_movies);
         }
     });
   }
@@ -89,6 +90,8 @@ const Movies = () => {
    */
   const CreatePagination = () =>{
     var pages = totalMovie/limit;
+    
+    setTotalPages(pages);
 
     var pageArr=[];
     var currOffset = 0;
@@ -101,27 +104,52 @@ const Movies = () => {
       }
     }
 
+
+
     return (
-      <nav aria-label="Page navigation">
-        <ul className="pagination">          
-          <div className='prev-btn'>Prev</div>          
-          {pageArr.map((pageOffset,idx)=>(
-              <li 
-              key={idx} 
-              className={pageOffset == offset ? 'page-item active' : 'page-item'}>
-                <a 
-                  className="page-link" 
-                  data-offset={pageOffset} 
-                  href="#" 
-                  onClick={setPage}>
-                  {++idx}
-                </a>
-              </li>
-          ))}
-          <div className='next-btn'>Next</div>
-        </ul>
-      </nav>
+      <>
+        <nav aria-label="Page navigation">
+          <ul className="pagination">          
+            <div className='prev-btn' onClick={() => prevPage()}>Prev</div>          
+            {pageArr.map((pageOffset,idx)=>(
+                <li 
+                key={idx} 
+                className={pageOffset == offset ? 'page-item active' : 'page-item'}>
+                  <a 
+                    className="page-link" 
+                    data-offset={pageOffset} 
+                    href="#" 
+                    onClick={setPage}>
+                    {++idx}
+                  </a>
+                </li>
+            ))}
+            <div className='next-btn' onClick={() => nextPage()}>Next</div>
+          </ul>
+        </nav>
+      </>
     )
+  }
+
+  const prevPage = (e) => {
+    var curOffset = offset;
+    
+    if(curOffset > 0){
+      --curOffset
+      setOffset(curOffset);
+      getMovies(curOffset);
+    }
+
+  }
+
+  const nextPage = (e) => {
+
+    if(offset < (parseInt(totalPages) - 1)){
+      var curOffset = offset;
+      ++curOffset
+      setOffset(curOffset);
+      getMovies(curOffset);
+    }
   }
 
   /**
@@ -135,6 +163,7 @@ const Movies = () => {
     getMovies(offset);
   }
 
+
   /**
    * * loggin out
    *
@@ -144,25 +173,28 @@ const Movies = () => {
       navigate("/login");
   }
 
+
   return (
     <>
         <div className='screen-section empty-movie-screen'>
-          <div className='container'>      
+          <div className='container'>
               <button className='logout-btn' onClick={()=>LogOut()}>Log Out <img src="assets/images/logout-icon.svg" alt="Log Out" /></button>
-              <div className='empty-movie'>
-                <div className='empty-movie-content'>
-                    <h2 className='heading' style={{textAlign:'center'}}>Your movie list is empty</h2>
-                    <button onClick={()=>navigate("/movie-create")} className='add-movie-btn'>Add a new movie</button>
-                </div>
-              </div>
               <div>
-                <h2 className='heading movies-heading'>My movies <img src="assets/images/plus-icon.svg" alt='image' /></h2>
+                <h2 className='heading movies-heading'>My movies <img src="assets/images/plus-icon.svg" alt='image' onClick={()=>navigate("/movie-create")}/></h2>
+                <div className='empty-movie'>
+                {!totalMovie && (
+                    <div className='empty-movie-content'>
+                        <h2 className='heading' style={{textAlign:'center'}}>Your movie list is empty</h2>
+                        <button onClick={()=>navigate("/movie-create")} className='add-movie-btn'>Add a new movie</button>
+                    </div>
+                )}
+                </div>
                 <div className="movie-card-row">
                   {movies.map((movie,idx)=>(
                     <div key={idx} className="col">
                       <div className='movie-card'>
                         <div className='img-wrapper'>
-                          <img src={process.env.REACT_APP_API_DOMAIN+'/'+movie.featured_image} />
+                          <img src={process.env.REACT_APP_API_DOMAIN+movie.featured_image} />
                         </div>
                         <h4 className='card-title'>{movie.title}</h4>
                         <p className='card-publish-year'>{movie.publish_year}</p>
@@ -183,7 +215,7 @@ const Movies = () => {
                   ))}
                 </div>
                 <div className="row mt-5">
-                  <CreatePagination />
+                  { totalMovie > 0 && (<CreatePagination />)}
                 </div>
               </div>
           </div>

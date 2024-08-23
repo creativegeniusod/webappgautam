@@ -13,9 +13,13 @@ const Create = () => {
 	const [movieImage,setMovieImage] = React.useState("");
 	const [movieTitle,setMovieTitle] = React.useState("");
 	const [movieYear,setMovieYear] = React.useState("");
+	const [visibleTitleDanger, setVisibleTitleDanger] = React.useState("");
+	const [visibleYearDanger, setVisibleYearDanger] = React.useState("");
+	const [visibleThumbDanger, setVisibleThumbDanger] = React.useState("");
 	const [visibleDanger, setVisibleDanger] = React.useState("");
 	const [visibleSuccess, setVisibleSuccess] = React.useState("");
 	const [movieData,setMovieData] = React.useState(new FormData());
+	const [previewThumb,setPreviewThumb] = React.useState("");
 
 	/**
 	 * * creating form data on page load
@@ -36,9 +40,13 @@ const Create = () => {
 	 * * handling movie thumbnail change
 	 *
 	 */
-  	const handleFileChange = (e) => {
+  	const handleFileChange = async (e) => {
 	    if(e.target.files.length > 0){
 	      	appendToForm('thumbnail',e.target.files[0],e.target.files[0].name);
+	      	var imgPreview = await getImageBase64(e.target.files[0]);
+	      	setPreviewThumb(imgPreview);
+	    }else{
+	    	setPreviewThumb("");
 	    }
   	}
 
@@ -83,17 +91,17 @@ const Create = () => {
   	const handleSubmit = () => {
 
   		if(!movieData.get("title")){
-  			setVisibleDanger('Title cannot be left blank.');
+  			setVisibleTitleDanger('Title cannot be left blank.');
   			return false;
   		}
 
   		if(!movieData.get("publish_year")){
-  			setVisibleDanger('Year cannot be left blank.');
+  			setVisibleYearDanger('Year cannot be left blank.');
   			return false;
   		}
 
   		if(!movieData.get("thumbnail")){
-  			setVisibleDanger('Movie image cannot be left blank');
+  			setVisibleThumbDanger('Movie image cannot be left blank');
   			return false;
   		}
 
@@ -111,6 +119,23 @@ const Create = () => {
 	    });
   	}
 
+
+  	const getImageBase64 = (file) => {
+
+  		return new Promise((resolve,reject)=>{
+
+		    const fileReader = new FileReader();
+		    fileReader.readAsDataURL(file)
+		    fileReader.onload = () => {
+		      resolve(fileReader.result);
+		    }
+		    fileReader.onerror = (error) => {
+		      reject(error);
+		    }
+
+  		});
+  	}
+
   	/**
    	 * * loggin out
    	 *
@@ -126,30 +151,35 @@ const Create = () => {
 				<div className='container'>
 					<button className='logout-btn' onClick={()=>LogOut()}>Log Out <img src="assets/images/logout-icon.svg" alt="Log Out" /></button>
 					<h1 className='heading'>Create a new movie</h1>
-					<form className="movie-form">
+					<div className="movie-form">
 						<div className='drag-drop-wrapper'>
 							<div className='drag-drop-content'> 
 								<img src="assets/images/drag-icon.svg" alt='Image' />
 								<p className='drag-drop-text'>Drop an image here</p>
-								<p className='file-name'>32344443343.png</p>
+								{previewThumb !="" && (
+									<img className="preview" src={previewThumb} alt='Image' />
+								)}
 							</div>
 							<input type="file" id="movie-image" onChange={handleFileChange}/>
+							<p style={{color:'red'}}>{visibleThumbDanger}</p>
 						</div>
 						<div className='create-movie-content'>
 							<div className='create-movie-inputs'>
 								<input type="text" id="movie-title" className='input-field' value={movieTitle} onChange={handleTitleChange} placeholder='Title'/>
+								<p style={{color:'red'}}>{visibleTitleDanger}</p>
 								<input type="number" className='input-field year-field' placeholder="Publishing year" min="1900" max="2099" step="1" value={movieYear} onChange={handleYearChange} />
+								<p style={{color:'red'}}>{visibleYearDanger}</p>
 							</div>
 							<div className='btns-wrappers'>
 								<div className='btns-wrapper'>
-									<button onClick={handleSubmit} className="cancel-btn">Cancel</button>
+									<button onClick={()=>navigate("/movies")} className="cancel-btn">Cancel</button>
 									<button onClick={handleSubmit} className="submit-btn">Submit</button>
 								</div>
 								<p style={{color:'red'}}>{visibleDanger}</p>
-								</div>
 								<p style={{color:'green'}}>{visibleSuccess}</p>
+							</div>
 						</div>
-					</form>
+					</div>
 				</div>	
 			</div>
 	    </>
