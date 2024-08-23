@@ -161,22 +161,26 @@ const Create = () => {
 								)}
 							</div>
 							<input type="file" id="movie-image" onChange={handleFileChange}/>
-							<p style={{color:'red'}}>{visibleThumbDanger}</p>
+							<p className='error-field' style={{color:'red'}}>{visibleThumbDanger}</p>
 						</div>
 						<div className='create-movie-content'>
 							<div className='create-movie-inputs'>
-								<input type="text" id="movie-title" className='input-field' value={movieTitle} onChange={handleTitleChange} placeholder='Title'/>
-								<p style={{color:'red'}}>{visibleTitleDanger}</p>
-								<input type="number" className='input-field year-field' placeholder="Publishing year" min="1900" max="2099" step="1" value={movieYear} onChange={handleYearChange} />
-								<p style={{color:'red'}}>{visibleYearDanger}</p>
+								<div className='input-wrapper'>
+									<input type="text" id="movie-title" className='input-field' value={movieTitle} onChange={handleTitleChange} placeholder='Title'/>
+									<p className='error-field' style={{color:'red'}}>{visibleTitleDanger}</p>
+								</div>
+								<div className='input-wrapper'>
+									<input type="number" className='input-field year-field' placeholder="Publishing year" min="1900" max="2099" step="1" value={movieYear} onChange={handleYearChange} />
+									<p className='error-field' style={{color:'red'}}>{visibleYearDanger}</p>
+								</div>								
 							</div>
 							<div className='btns-wrappers'>
 								<div className='btns-wrapper'>
 									<button onClick={()=>navigate("/movies")} className="cancel-btn">Cancel</button>
 									<button onClick={handleSubmit} className="submit-btn">Submit</button>
 								</div>
-								<p style={{color:'red'}}>{visibleDanger}</p>
-								<p style={{color:'green'}}>{visibleSuccess}</p>
+								<p className='error-field' style={{color:'red'}}>{visibleDanger}</p>
+								<p className='success-field' style={{color:'green'}}>{visibleSuccess}</p>
 							</div>
 						</div>
 					</div>

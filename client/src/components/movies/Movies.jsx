@@ -14,7 +14,7 @@ const Movies = () => {
   const auth = useAuthUser();
   const signOut = useSignOut();
   const navigate = useNavigate();
-  const limit = 1;
+  const limit = 8;
 
 
   /**
@@ -181,14 +181,14 @@ const Movies = () => {
               <button className='logout-btn' onClick={()=>LogOut()}>Log Out <img src="assets/images/logout-icon.svg" alt="Log Out" /></button>
               <div>
                 <h2 className='heading movies-heading'>My movies <img src="assets/images/plus-icon.svg" alt='image' onClick={()=>navigate("/movie-create")}/></h2>
-                <div className='empty-movie'>
                 {!totalMovie && (
+                <div className='empty-movie'>
                     <div className='empty-movie-content'>
                         <h2 className='heading' style={{textAlign:'center'}}>Your movie list is empty</h2>
                         <button onClick={()=>navigate("/movie-create")} className='add-movie-btn'>Add a new movie</button>
                     </div>
-                )}
                 </div>
+                )}
                 <div className="movie-card-row">
                   {movies.map((movie,idx)=>(
                     <div key={idx} className="col">

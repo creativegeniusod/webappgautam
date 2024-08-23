@@ -188,7 +188,6 @@ const Edit = () => {
 									{previewThumb !="" && (
 										<img className="preview" src={previewThumb} alt='Image' />
 									)}
-
 									{previewThumb =="" && movieImage != "" && (
 										<img className="preview" src={process.env.REACT_APP_API_DOMAIN+movieImage} alt='Image' />
 									)}
@@ -197,19 +196,23 @@ const Edit = () => {
 							</div>
 						<div className='create-movie-content'>
 							<div className='create-movie-inputs'>
+							<div className='input-wrapper'>
 								<input type="text" className='input-field' placeholder="Title" id="movie-title" value={movieTitle} onChange={handleTitleChange}/>
-								<p style={{color:'red'}}>{visibleTitleDanger}</p>
+								<p className='error-field' style={{color:'red'}}>{visibleTitleDanger}</p>
+							</div>
+							<div className='input-wrapper'>
 								<input type="number" className='input-field year-field' placeholder="Year" min="1900" max="2099" step="1" value={movieYear} onChange={handleYearChange} />
-								<p style={{color:'red'}}>{visibleYearDanger}</p>
+								<p className='error-field' style={{color:'red'}}>{visibleYearDanger}</p>
+							</div>
 							</div>
 							<div className='btns-wrappers'>
 								<div className='btns-wrapper'>
 									<button onClick={()=>navigate("/movies")} className="cancel-btn">Cancel</button>
 									<button onClick={handleSubmit} className="submit-btn">Update</button>
 								</div>
-								<p style={{color:'red'}}>{visibleDanger}</p>
+								<p className='error-field' style={{color:'red'}}>{visibleDanger}</p>
 								</div>
-								<p style={{color:'green'}}>{visibleSuccess}</p>
+								<p className='success-field' style={{color:'green'}}>{visibleSuccess}</p>
 						</div>
 					</div>
 				</div>	
